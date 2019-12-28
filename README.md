@@ -1,2 +1,3 @@
-# AlgorithmLearningGuide
-Algorithm learning guide by Javascript
+# 算法学习指南
+
+#### 二分查找
