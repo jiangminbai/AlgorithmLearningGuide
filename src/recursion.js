@@ -5,6 +5,7 @@
 /**
  * 阶乘
  * @param {number} n 阶乘的最大数
+ * @returns {number} 阶乘结果
  */
 function factorial(n) {
   if (n <= 1) return n // 基线条件
