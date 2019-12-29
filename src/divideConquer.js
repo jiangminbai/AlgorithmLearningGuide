@@ -8,16 +8,15 @@
 /**
  * 场景
  * 欧几里得算法：求两个正整数的最大公约数
+ * 欧几里得公式：gcd(a, b) = gcd(b, a % b), gcd(a, 0) = a
  * 将除数和余数反复做除法计算，直到余数为0，此时除数为最大公约数
+ * @param {number} a 正整数a 被除数
+ * @param {number} b 正整数b 除数
+ * @returns {number} 最大公约数
  */
-
 function gcd(a, b) {
-  let numerator = Math.max(a, b)
-  let denominator = Math.min(a, b)
-  let remainder = numerator % denominator
-
-  if (remainder === 0) return denominator // 基线条件
-  return gcd(denominator, remainder) // 递归条件
+  if (b === 0) return a // 基线条件
+  return gcd(b, a % b) // 递归条件
 }
 
 var g = gcd(9, 3)
