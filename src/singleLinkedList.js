@@ -53,9 +53,9 @@ class SingleLinkedList {
     this.length++
   }
 
-  display() {
+  display(head) {
     let info = "["
-    let node = this.head
+    let node = head
     while(node) {
       info += `${node.key}->`
       node = node.next
@@ -84,25 +84,16 @@ list.insert(nodea)
 list.insert(nodeb)
 list.insert(nodec)
 list.insert(noded)
-list.display()
+list.display(list.head)
 
 // 反转单链表
 // {key:a,next}->{key:b,next}->{key:c,next}->{key:d,next}->null
-function reverseList(l) {
-  let prev = l.head
-  let node = l.head.next
-  l.tail = prev
-  l.tail.next = null
+function reverseList(head) {
+  let [prev, node] = [null, head]
   while(node) {
-    let next = node.next
-    // 反转指针
-    node.next = prev
-    // 移动指针
-    prev = node
-    node = next
-    if (!node) l.head = prev
+    [node.next, prev, node] = [prev, node, node.next]
   }
+  return prev
 }
 
-reverseList(list)
-list.display()
+list.display(reverseList(list.head))

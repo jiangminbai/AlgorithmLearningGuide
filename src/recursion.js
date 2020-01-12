@@ -5,6 +5,7 @@
 /**
  * 场景
  * 阶乘
+ * 数学公式: f(n) = n * f(n-1);f(1) = 1
  * @param {number} n 阶乘的最大数
  * @returns {number} 阶乘结果
  */
