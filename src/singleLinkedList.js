@@ -13,7 +13,8 @@ class LinkNode {
 // 单向链表类
 class SingleLinkedList {
   constructor() {
-    this.head = null // head为表头，如果head为null表示长度为0
+    this.head = null // 表头，如果head为null表示长度为0
+    this.tail = null // 表尾
     this.length = 0
   }
 
@@ -33,20 +34,13 @@ class SingleLinkedList {
 
   /**
    * 插入节点
-   * @param {Object} preNode 节点
    * @param {Object} node 节点
    */
-  insert(preNode, node) {
-    // 插入到中间
-    if (node) {
-      node.next = preNode.next
-      preNode.next = node
-    } else {
-      // 插入到表头
-      node = preNode
-      node.next = this.head
-      this.head = node
-    }
+  insert(node) {
+    // 插入到表头
+    node.next = this.head
+    if (this.length === 0) this.tail = node
+    this.head = node
     
     this.length++
   }
