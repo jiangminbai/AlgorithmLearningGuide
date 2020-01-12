@@ -37,10 +37,8 @@ class SingleLinkedList {
    * @param {Object} node 节点
    */
   insert(node) {
-    // 插入到表头
-    node.next = this.head
-    if (this.length === 0) this.tail = node
-    this.head = node
+    if (this.tail) this.tail.next = node, this.tail = node
+    if (this.length === 0) this.head = node, this.tail = node
     
     this.length++
   }
@@ -54,6 +52,17 @@ class SingleLinkedList {
     preNode.next = node.next
     this.length++
   }
+
+  display() {
+    let info = "["
+    let node = this.head
+    while(node) {
+      info += `${node.key}->`
+      node = node.next
+    }
+    info += 'NULL]'
+    console.log(info)
+  }
 }
 
 /**
@@ -65,3 +74,14 @@ class SingleLinkedList {
 | O(n)   | O(1)   | O(1)   |
 +--------+--------+--------+
  */
+
+let list = new SingleLinkedList()
+let nodea = new LinkNode('a')
+let nodeb = new LinkNode('b')
+let nodec = new LinkNode('c')
+let noded = new LinkNode('d')
+list.insert(nodea)
+list.insert(nodeb)
+list.insert(nodec)
+list.insert(noded)
+list.display()
