@@ -85,3 +85,24 @@ list.insert(nodeb)
 list.insert(nodec)
 list.insert(noded)
 list.display()
+
+// 反转单链表
+// {key:a,next}->{key:b,next}->{key:c,next}->{key:d,next}->null
+function reverseList(l) {
+  let prev = l.head
+  let node = l.head.next
+  l.tail = prev
+  l.tail.next = null
+  while(node) {
+    let next = node.next
+    // 反转指针
+    node.next = prev
+    // 移动指针
+    prev = node
+    node = next
+    if (!node) l.head = prev
+  }
+}
+
+reverseList(list)
+list.display()
