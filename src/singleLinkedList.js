@@ -86,7 +86,7 @@ list.insert(nodec)
 list.insert(noded)
 list.display(list.head)
 
-// 反转单链表
+// 反转单链表-遍历法
 // {key:a,next}->{key:b,next}->{key:c,next}->{key:d,next}->null
 function reverseList(head) {
   let [prev, node] = [null, head]
