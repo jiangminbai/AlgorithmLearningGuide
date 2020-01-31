@@ -1,5 +1,12 @@
-function y(x) {
-  return x * x + 2 * x + 1
-}
-
-console.log(y(3))
+console.log('main1')
+new Promise((resolve, reject) => {
+  resolve('promise1')
+}).then(res => {
+  console.log(res)
+})
+new Promise((resolve, reject) => {
+  resolve('promise2')
+}).then(res => {
+  console.log(res)
+})
+console.log('main2')

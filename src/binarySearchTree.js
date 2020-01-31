@@ -54,7 +54,7 @@ let node16 = createLeftNode(node17, 16)
 let node21 = createRightNode(node17, 21)
 let T = node10
 
-console.log(T)
+// console.log(T)
 
 /**
  * 中序遍历(inorder tree walk)
@@ -112,7 +112,7 @@ function treeSearch(node, key) {
   else return treeSearch(node.right, key)
 }
 
-console.log(treeSearch(T, 10))
+// console.log(treeSearch(T, 10))
 
 /**
  * minimum：查询最小关键字
@@ -123,7 +123,7 @@ function treeMinimum(node) {
   }
   return node
 }
-console.log(treeMinimum(T))
+// console.log(treeMinimum(T))
 
 /**
  * maximum：查询最大关键字
@@ -134,7 +134,7 @@ function treeMaximum(node) {
   }
   return node
 }
-console.log(treeMaximum(T))
+// console.log(treeMaximum(T))
 
 /**
  * successor：后继
@@ -161,3 +161,51 @@ function treeSuccessor(node) {
 // +-----------------+--------+---------+---------+-----------+-------------+
 // | time complexity | O(h)   | O(h)    | O(h)    | O(h)      | O(h)        |
 // +-----------------+--------+---------+---------+-----------+-------------+
+
+/**
+ * insert：插入
+ */
+
+function treeInsert(T, z) {
+  let y = null
+  let x = T
+  // 从二叉搜索树根节点开始查询插入的节点
+  while(x) {
+    y = x
+    if (z.key < x.key) {
+      x  = x.left
+    } else {
+      x = x.right
+    }
+  }
+  // 插入z节点到y节点上
+  z.p = y
+  if (y === null) {
+    z = T
+  } else if (z.key < y.key) {
+    y.left = z
+  } else {
+    y.right = z
+  }
+}
+
+const z = createNode(18)
+treeInsert(T, z)
+console.log(T)
+
+/**
+ * delete：删除
+ */
+function treeDelete() {
+
+}
+// 插入和删除的时间复杂度
+// +-----------------+--------+--------+
+// |                 | insert | delete |
+// +-----------------+--------+--------+
+// | time complexity | O(h)   | O(h)   |
+// +-----------------+--------+--------+
+
+/**
+ * 随机构建二叉搜索树：对于一棵有n个不同关键字随机构建的二叉搜索树的期望高度为logn
+ */
