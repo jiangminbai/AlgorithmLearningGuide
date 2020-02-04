@@ -137,3 +137,6 @@ function RBInsertFixup(T, z) {
   T.root.color = BLACK
 }
 
+/**
+ * 删除
+ */
