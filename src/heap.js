@@ -125,4 +125,59 @@ function heapSort(A) {
 
 /**
  * 优先队列
+ * 最大优先队列的应用场景：共享计算机系统的作业调度
+ * 最小优先队列的应用场景：用于基于事件驱动的模拟器
+ * 最大优先队列操作：
+ * 1.Insert(S, k)：将元素k插入集合S中
+ * 2.Maximum(S)：返回S中最大键值的元素
+ * 3.ExtractMax(S): 去掉并返回S中最大键值的元素
+ * 4.IncreaseKey(S, x, k)：将元素x的关键值增加到k
  */
+class PriorityQueue {
+  insert(A, x) {
+
+  }
+
+  /**
+   * 时间复杂度：O(1)
+   */
+  maximum(A) {
+    return A[1]
+  }
+
+  /**
+   * 时间复杂度：O(lgn)
+   */
+  extractMax(A) {
+    let heapSize = A.length - 1
+    if (heapSize < 1) throw new Error('heap underflow')
+
+    let max = A[1]
+    A[1] = A[heapSize]
+    A.length = A.length - 1
+    maxHeapify(A, 1)
+    return max
+  }
+
+  /**
+   * 时间复杂度：O(lgn)
+   */
+  increaseKey(A, i, k) {
+    if (A[i] > k) throw new Error('new key is smaller than current key')
+    A[i] = k
+    while(i >= 1 && A[i] > A[Math.floor(i/2)]) {
+      let tmp = A[i]
+      A[i] = A[Math.floor(i/2)]
+      A[Math.floor(i/2)] = tmp
+      i = math.floor(i/2)
+    }
+  }
+
+  /**
+   * 时间复杂度：O(lgn)
+   */
+  insert(S, k) {
+    A[A.length] = 1
+    this.increaseKey(S, A.length - 1, k)
+  }
+}
