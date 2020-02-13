@@ -134,10 +134,6 @@ function heapSort(A) {
  * 4.IncreaseKey(S, x, k)：将元素x的关键值增加到k
  */
 class PriorityQueue {
-  insert(A, x) {
-
-  }
-
   /**
    * 时间复杂度：O(1)
    */
