@@ -8,7 +8,7 @@
  * 空间复杂度：O(V + E)
  * 这里列出两种表示方法：
  * 1.吉多·范罗苏姆提出的，使用哈希表将每个顶点与其邻接点数组关联起来
- * 2.在Cormenetal中，顶点的每个元素都指向邻接点链表
+ * 2.在Cormenetal中，使用数组将顶点的每个元素都指向邻接点链表(个人认为js中一般用Map数据结构来实现较好)
  * 优劣分析：
  * 1.存储空间比邻接矩阵更小
  * 2.无法快速判断(u, v)为图中的一条边
@@ -21,6 +21,25 @@ const graph = {
   5: [4],
   6: [6]
 }
+
+// 当需要节点时对象时，需要使用第二种表示方式
+const graph1 = new Map()
+// 顶点
+const v1 = { key: 1 }
+const v2 = { key: 2 }
+const v3 = { key: 3 }
+const v4 = { key: 4 }
+const v5 = { key: 5 }
+const v6 = { key: 6 }
+
+// 设置边
+graph1.set('s', v1)
+graph1.set(v1, [v2, v4])
+graph1.set(v2, [v5])
+graph1.set(v3, [v5, v6])
+graph1.set(v4, [v2])
+graph1.set(v5, [v4])
+graph1.set(v6, [v6])
 
 
 /**
