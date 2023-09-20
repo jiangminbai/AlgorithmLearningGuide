@@ -94,7 +94,7 @@ function bfs1(g, s) {
   // 3.将顶点推出队列Q并设置为黑色;将顶点关联的邻接点关联数组的所有节点颜色设置为灰色并推入队列Q中
   while(Q.length) {
     let u = Q.shift()
-    u.color = BLACK
+    
     for (let v of g.get(u)) {
       if (v.color === WHITE) {
         v.color = GRAY
@@ -103,5 +103,7 @@ function bfs1(g, s) {
         Q.push(v)
       }
     }
+
+    u.color = BLACK
   }
 }
