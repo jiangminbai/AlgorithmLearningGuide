@@ -31,4 +31,69 @@ console.log(`最大公约数：${g}`)
 
 /**
  * 最大子数组问题：求一个数组中连续子数组之和最大的
+ * 思考过程：
+ * 1.分解：求解[low, high]最大子数组A[i, j]=>分解[low, mid] [mid+1, hight]
+ * 子数组必然位于[low, mid]或[mid+1, high]或者跨越中点所有子数组中和最大者
+ * 所以原问题[low, high]分解为更小规模的子问题[low, mid]和[mid+1, high]，而跨越中点的情况可以通过线性时间解出
+ * 2.合并：每一层递归中，都需要判断最大子数组存在于[low, mid]中还是[mid+1, high]中，还是跨越中点中
+ * 递归式：
+ * 当n=1;T(n)=1;
+ * 当n>1;T(n)=2T(n/2)+O(n)
  */
+const arr = [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
+
+// 求解跨越中点时的最大子数组
+const findCrossMaxSubArr = (a, low, mid, high) => {
+  let leftSum = -Infinity
+  let maxLeft
+  let sum1 = 0
+  for (let i = mid; i >=low; i--) {
+    sum1 += a[i]
+    if (sum1 >= leftSum) {
+      leftSum = sum1
+      maxLeft = i
+    }
+  }
+
+  let rightSum = -Infinity
+  let maxRight
+  let sum2 = 0
+  for (let j = mid + 1; j <= high; j++) {
+    sum2 += a[j]
+    if (sum2 >= rightSum) {
+      rightSum = sum2
+      maxRight = j
+    }
+  }
+
+  return [
+    maxLeft,
+    maxRight,
+    leftSum + rightSum,
+  ]
+}
+
+const findMaxSubArr = (a, low, high) => {
+  if (high === low) {
+    return [
+      low,
+      high,
+      a[low]
+    ]
+  } else {
+    const mid = Math.floor((high + low)/2)
+    const [leftLow, leftHigh, leftSum] = findMaxSubArr(a, low, mid)
+    const [rightLow, rightHigh, rightSum] = findMaxSubArr(a, mid + 1, high)
+    const [crossLow, crossHigh, crossSum] = findCrossMaxSubArr(a, low, mid, high)
+
+    if (leftSum >= rightSum && leftSum >= crossSum) {
+      return [leftLow, leftHigh, leftSum]
+    } else if (rightSum >= leftSum && rightSum >= crossSum) {
+      return [rightLow, rightHigh, rightSum]
+    } else {
+      return [crossLow, crossHigh, crossSum]
+    }
+  }
+}
+
+console.log('最大子数组：' + findMaxSubArr(arr, 0, arr.length - 1))
