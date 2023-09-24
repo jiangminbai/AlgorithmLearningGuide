@@ -38,7 +38,7 @@ console.log(`最大公约数：${g}`)
  * 2.合并：每一层递归中，都需要判断最大子数组存在于[low, mid]中还是[mid+1, high]中，还是跨越中点中
  * 递归式：
  * 当n=1;T(n)=1;
- * 当n>1;T(n)=2T(n/2)+O(n)
+ * 当n>1;T(n)=2T(n/2)+O(n) 递归树高度为lgn 时间复杂性为nlgn
  */
 const arr = [13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7]
 
@@ -97,3 +97,41 @@ const findMaxSubArr = (a, low, high) => {
 }
 
 console.log('最大子数组：' + findMaxSubArr(arr, 0, arr.length - 1))
+
+/**
+ * 矩阵乘法Strassen算法
+ * 矩阵乘法定义：若矩阵A=a(i,j),B=b(i,j);i,j=1,2,..,n;矩阵乘积C=A*B,元素c(i,j)=∑a(i,k)*b(k,j),k=1->n
+ */
+const A = [
+  [1, 2],
+  [3, 4]
+]
+const B = [
+  [4, 5],
+  [3, 5]
+]
+
+/**
+ * 根据矩阵乘法定义的算法
+ */
+const maxtrix1 = (A, B) => {
+  const n = A.length
+  const C = []
+  for (let i = 0; i < n; i++) {
+    const c = []
+    for (let j = 0; j < n; j++) {
+      let sum = 0
+      for (let k = 0; k < n; k++) {
+        sum += A[i][k]*B[k][j]
+      }
+      c.push(sum)
+    }
+    C.push(c)
+  }
+  return C
+}
+console.log(maxtrix1(A, B))
+
+/**
+ * 
+ */
