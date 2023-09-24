@@ -97,3 +97,67 @@ const cut4 = (n) => {
   }
   return r[n]
 }
+
+/**
+ * 最长公共子序列(LCS)
+ * 定理：令序列X=<x1, x2, ..., xm>,序列Y=<y1, y2, ..., yn>,序列Z=<z1, z2, ..., zk>为X,Y的任意LCS
+ * 1.若xm=yn,则zk=xm=yn且Z(k-1)是X(m-1)和Y(n-1)的LCS
+ * 2.若xm!=yn,那么zk!=xm意味着Z是X(m-1)和Yn的LCS
+ * 3.若xm!=yn,那么zk!=yn意味着Z是Xm和Y(n-1)的LCS
+ * 递归式：
+ * c[i, j] = 0;  当i=0或j=0
+ * c[i, j] = c[i-1, j-1] + 1 当i,j>0且xi=yj
+ * c[i, j] = max(c[i, j-1], c[i-1, j]) 当i,j>0且xi!=yj
+ * 有子问题重叠，总共有i*j个不同的子问题
+ */
+/**
+ * 自底向上
+ */
+const X = ['a', 'b', 'c', 'b', 'd', 'a', 'b']
+const Y = ['b', 'd', 'c', 'a', 'b', 'a']
+
+const LCSLength = (x, y) => {
+  const m = x.length
+  const n = y.length
+  const b = Array.from(new Array(m+1), x => new Array(n+1)) // 构造一个m*n的行主次序的矩阵
+  const c = Array.from(new Array(m+1), x => new Array(n+1))
+
+  for (let i = 0; i < m; i++) {
+    c[i][0] = 0
+  }
+  for (let i = 0; i < n; i++) {
+    c[0][i] = 0
+  }
+
+  for (let i = 1; i < m+1; i++) {
+    for (let j = 1; j < n+1; j++) {
+      if (x[i-1] === y[j-1]) {
+        c[i][j] = c[i-1][j-1]+1
+        b[i][j] = 'right-top'
+      } else if (c[i-1][j] >= c[i][j-1]) {
+        c[i][j] = c[i-1][j]
+        b[i][j] = 'right'
+      } else {
+        c[i][j] = c[i][j-1]
+        b[i][j] = 'top'
+      }
+    }
+  }
+  return [c, b]
+}
+
+const [c, b] = LCSLength(X, Y)
+
+const printLCS = (b, X, i, j) => {
+  if (i === 0 || j === 0) return []
+  if (b[i][j] === 'right-top') {
+    const el = printLCS(b, X, i-1, j-1)
+    return el.concat(X[i-1])
+  } else if (b[i][j] === 'top') {
+    return printLCS(b, X, i-1, j)
+  } else {
+    return printLCS(b, X, i, j-1)
+  }
+}
+
+console.log(printLCS(b, X, X.length, Y.length))
