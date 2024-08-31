@@ -161,3 +161,7 @@ const printLCS = (b, X, i, j) => {
 }
 
 console.log(printLCS(b, X, X.length, Y.length))
+
+/**
+ * 最优二叉搜索树
+ */

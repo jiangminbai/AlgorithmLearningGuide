@@ -63,3 +63,7 @@ const act2 = (s, f) => {
 }
 
 console.log(act2(s,f))
+
+/**
+ * 赫夫曼编码
+ */
